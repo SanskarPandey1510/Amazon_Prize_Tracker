@@ -40,3 +40,4 @@ if z<100:
     server.login(os.environ["EMAIL_ADDRESS"],os.environ["google-app-password"])
     data=f"Your product is in sale its current price is {y}"
     server.sendmail(from_addr=os.environ["EMAIL_ADDRESS"],to_addrs=os.environ["to"],msg=data)
+    server.quit() 
