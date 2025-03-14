@@ -1,6 +1,9 @@
 # Importing Required modules
 from bs4 import BeautifulSoup
 import requests
+import smtplib
+import os
+from dotenv import load_dotenv
 
 link="https://appbrewery.github.io/instant_pot/"
 
@@ -18,8 +21,8 @@ while i<len(x) and x[i]!='.':
 x=v
 y=int(y)
 z=x+y/100
-print(z,type(z))
-# zrow cbhb vinx gpaj
+# print(z,type(z))
+# 
 # 
 # User-Agent:
 # Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:136.0) Gecko/20100101 Firefox/136.0
@@ -30,3 +33,10 @@ header={
 "en-US,en;q=0.5",
 }
 
+load_dotenv()
+if z<100:
+    server=smtplib.SMTP(os.environ["SMTP_ADDRESS"],587)
+    server.starttls()
+    server.login(os.environ["EMAIL_ADDRESS"],os.environ["google-app-password"])
+    data=f"Your product is in sale its current price is {y}"
+    server.sendmail(from_addr=os.environ["EMAIL_ADDRESS"],to_addrs=os.environ["to"],msg=data)
